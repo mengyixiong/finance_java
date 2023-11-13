@@ -1,0 +1,196 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+        PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.ruoyi.data.mapper.AccountTitleMapper">
+
+    <resultMap type="AccountTitle" id="AccountTitleResult">
+        <result property="id"    column="id"    />
+        <result property="pid"    column="pid"    />
+        <result property="level"    column="level"    />
+        <result property="code"    column="code"    />
+        <result property="cnName"    column="cn_name"    />
+        <result property="enName"    column="en_name"    />
+        <result property="type"    column="type"    />
+        <result property="format"    column="format"    />
+        <result property="abb"    column="abb"    />
+        <result property="currency"    column="currency"    />
+        <result property="comId"    column="com_id"    />
+        <result property="isForeign"    column="is_foreign"    />
+        <result property="isDn"    column="is_dn"    />
+        <result property="isFreezed"    column="is_freezed"    />
+        <result property="isCash"    column="is_cash"    />
+        <result property="isLast"    column="is_last"    />
+        <result property="balance"    column="balance"    />
+        <result property="currencyBalance"    column="currency_balance"    />
+        <result property="yearBegining"    column="year_begining"    />
+        <result property="yearBeginingCurrency"    column="year_begining_currency"    />
+        <result property="accountOpening"    column="account_opening"    />
+        <result property="accountOpeningCurrency"    column="account_opening_currency"    />
+        <result property="venderRequired"    column="vender_required"    />
+        <result property="clerkRequired"    column="clerk_required"    />
+        <result property="teamRequired"    column="team_required"    />
+        <result property="branchRequired"    column="branch_required"    />
+        <result property="createdBy"    column="created_by"    />
+        <result property="createdTime"    column="created_time"    />
+        <result property="updatedTime"    column="updated_time"    />
+        <result property="updatedBy"    column="updated_by"    />
+    </resultMap>
+
+    <sql id="selectAccountTitleVo">
+        select id, pid, level, code, cn_name, en_name, type, format, abb, currency, com_id, is_foreign, is_dn, is_freezed, is_cash, is_last, balance, currency_balance, year_begining, year_begining_currency, account_opening, account_opening_currency, vender_required, clerk_required, team_required, branch_required, created_by, created_time, updated_time, updated_by from fx_account_titles
+    </sql>
+
+    <select id="selectAccountTitleList" parameterType="AccountTitle" resultMap="AccountTitleResult">
+        <include refid="selectAccountTitleVo"/>
+        <where>
+            <if test="pid != null "> and pid = #{pid}</if>
+            <if test="level != null "> and level = #{level}</if>
+            <if test="code != null  and code != ''"> and code = #{code}</if>
+            <if test="cnName != null  and cnName != ''"> and cn_name like concat('%', #{cnName}, '%')</if>
+            <if test="enName != null  and enName != ''"> and en_name like concat('%', #{enName}, '%')</if>
+            <if test="type != null  and type != ''"> and type = #{type}</if>
+            <if test="format != null  and format != ''"> and format = #{format}</if>
+            <if test="abb != null  and abb != ''"> and abb = #{abb}</if>
+            <if test="currency != null  and currency != ''"> and currency = #{currency}</if>
+            <if test="comId != null "> and com_id = #{comId}</if>
+            <if test="isForeign != null  and isForeign != ''"> and is_foreign = #{isForeign}</if>
+            <if test="isDn != null  and isDn != ''"> and is_dn = #{isDn}</if>
+            <if test="isFreezed != null  and isFreezed != ''"> and is_freezed = #{isFreezed}</if>
+            <if test="isCash != null  and isCash != ''"> and is_cash = #{isCash}</if>
+            <if test="isLast != null  and isLast != ''"> and is_last = #{isLast}</if>
+            <if test="balance != null "> and balance = #{balance}</if>
+            <if test="currencyBalance != null "> and currency_balance = #{currencyBalance}</if>
+            <if test="yearBegining != null "> and year_begining = #{yearBegining}</if>
+            <if test="yearBeginingCurrency != null "> and year_begining_currency = #{yearBeginingCurrency}</if>
+            <if test="accountOpening != null "> and account_opening = #{accountOpening}</if>
+            <if test="accountOpeningCurrency != null "> and account_opening_currency = #{accountOpeningCurrency}</if>
+            <if test="venderRequired != null  and venderRequired != ''"> and vender_required = #{venderRequired}</if>
+            <if test="clerkRequired != null  and clerkRequired != ''"> and clerk_required = #{clerkRequired}</if>
+            <if test="teamRequired != null  and teamRequired != ''"> and team_required = #{teamRequired}</if>
+            <if test="branchRequired != null  and branchRequired != ''"> and branch_required = #{branchRequired}</if>
+            <if test="createdBy != null "> and created_by = #{createdBy}</if>
+            <if test="createdTime != null "> and created_time = #{createdTime}</if>
+            <if test="updatedTime != null "> and updated_time = #{updatedTime}</if>
+            <if test="updatedBy != null "> and updated_by = #{updatedBy}</if>
+        </where>
+    </select>
+
+    <select id="selectAccountTitleById" parameterType="Long" resultMap="AccountTitleResult">
+        <include refid="selectAccountTitleVo"/>
+        where id = #{id}
+    </select>
+
+    <insert id="insertAccountTitle" parameterType="AccountTitle" useGeneratedKeys="true" keyProperty="id">
+        insert into fx_account_titles
+        <trim prefix="(" suffix=")" suffixOverrides=",">
+            <if test="pid != null">pid,</if>
+            <if test="level != null">level,</if>
+            <if test="code != null and code != ''">code,</if>
+            <if test="cnName != null and cnName != ''">cn_name,</if>
+            <if test="enName != null">en_name,</if>
+            <if test="type != null and type != ''">type,</if>
+            <if test="format != null and format != ''">format,</if>
+            <if test="abb != null">abb,</if>
+            <if test="currency != null and currency != ''">currency,</if>
+            <if test="comId != null">com_id,</if>
+            <if test="isForeign != null">is_foreign,</if>
+            <if test="isDn != null">is_dn,</if>
+            <if test="isFreezed != null">is_freezed,</if>
+            <if test="isCash != null">is_cash,</if>
+            <if test="isLast != null">is_last,</if>
+            <if test="balance != null">balance,</if>
+            <if test="currencyBalance != null">currency_balance,</if>
+            <if test="yearBegining != null">year_begining,</if>
+            <if test="yearBeginingCurrency != null">year_begining_currency,</if>
+            <if test="accountOpening != null">account_opening,</if>
+            <if test="accountOpeningCurrency != null">account_opening_currency,</if>
+            <if test="venderRequired != null">vender_required,</if>
+            <if test="clerkRequired != null">clerk_required,</if>
+            <if test="teamRequired != null">team_required,</if>
+            <if test="branchRequired != null">branch_required,</if>
+            <if test="createdBy != null">created_by,</if>
+            <if test="createdTime != null">created_time,</if>
+            <if test="updatedTime != null">updated_time,</if>
+            <if test="updatedBy != null">updated_by,</if>
+        </trim>
+        <trim prefix="values (" suffix=")" suffixOverrides=",">
+            <if test="pid != null">#{pid},</if>
+            <if test="level != null">#{level},</if>
+            <if test="code != null and code != ''">#{code},</if>
+            <if test="cnName != null and cnName != ''">#{cnName},</if>
+            <if test="enName != null">#{enName},</if>
+            <if test="type != null and type != ''">#{type},</if>
+            <if test="format != null and format != ''">#{format},</if>
+            <if test="abb != null">#{abb},</if>
+            <if test="currency != null and currency != ''">#{currency},</if>
+            <if test="comId != null">#{comId},</if>
+            <if test="isForeign != null">#{isForeign},</if>
+            <if test="isDn != null">#{isDn},</if>
+            <if test="isFreezed != null">#{isFreezed},</if>
+            <if test="isCash != null">#{isCash},</if>
+            <if test="isLast != null">#{isLast},</if>
+            <if test="balance != null">#{balance},</if>
+            <if test="currencyBalance != null">#{currencyBalance},</if>
+            <if test="yearBegining != null">#{yearBegining},</if>
+            <if test="yearBeginingCurrency != null">#{yearBeginingCurrency},</if>
+            <if test="accountOpening != null">#{accountOpening},</if>
+            <if test="accountOpeningCurrency != null">#{accountOpeningCurrency},</if>
+            <if test="venderRequired != null">#{venderRequired},</if>
+            <if test="clerkRequired != null">#{clerkRequired},</if>
+            <if test="teamRequired != null">#{teamRequired},</if>
+            <if test="branchRequired != null">#{branchRequired},</if>
+            <if test="createdBy != null">#{createdBy},</if>
+            <if test="createdTime != null">#{createdTime},</if>
+            <if test="updatedTime != null">#{updatedTime},</if>
+            <if test="updatedBy != null">#{updatedBy},</if>
+        </trim>
+    </insert>
+
+    <update id="updateAccountTitle" parameterType="AccountTitle">
+        update fx_account_titles
+        <trim prefix="SET" suffixOverrides=",">
+            <if test="pid != null">pid = #{pid},</if>
+            <if test="level != null">level = #{level},</if>
+            <if test="code != null and code != ''">code = #{code},</if>
+            <if test="cnName != null and cnName != ''">cn_name = #{cnName},</if>
+            <if test="enName != null">en_name = #{enName},</if>
+            <if test="type != null and type != ''">type = #{type},</if>
+            <if test="format != null and format != ''">format = #{format},</if>
+            <if test="abb != null">abb = #{abb},</if>
+            <if test="currency != null and currency != ''">currency = #{currency},</if>
+            <if test="comId != null">com_id = #{comId},</if>
+            <if test="isForeign != null">is_foreign = #{isForeign},</if>
+            <if test="isDn != null">is_dn = #{isDn},</if>
+            <if test="isFreezed != null">is_freezed = #{isFreezed},</if>
+            <if test="isCash != null">is_cash = #{isCash},</if>
+            <if test="isLast != null">is_last = #{isLast},</if>
+            <if test="balance != null">balance = #{balance},</if>
+            <if test="currencyBalance != null">currency_balance = #{currencyBalance},</if>
+            <if test="yearBegining != null">year_begining = #{yearBegining},</if>
+            <if test="yearBeginingCurrency != null">year_begining_currency = #{yearBeginingCurrency},</if>
+            <if test="accountOpening != null">account_opening = #{accountOpening},</if>
+            <if test="accountOpeningCurrency != null">account_opening_currency = #{accountOpeningCurrency},</if>
+            <if test="venderRequired != null">vender_required = #{venderRequired},</if>
+            <if test="clerkRequired != null">clerk_required = #{clerkRequired},</if>
+            <if test="teamRequired != null">team_required = #{teamRequired},</if>
+            <if test="branchRequired != null">branch_required = #{branchRequired},</if>
+            <if test="createdBy != null">created_by = #{createdBy},</if>
+            <if test="createdTime != null">created_time = #{createdTime},</if>
+            <if test="updatedTime != null">updated_time = #{updatedTime},</if>
+            <if test="updatedBy != null">updated_by = #{updatedBy},</if>
+        </trim>
+        where id = #{id}
+    </update>
+
+    <delete id="deleteAccountTitleById" parameterType="Long">
+        delete from fx_account_titles where id = #{id}
+    </delete>
+
+    <delete id="deleteAccountTitleByIds" parameterType="String">
+        delete from fx_account_titles where id in
+        <foreach item="id" collection="array" open="(" separator="," close=")">
+            #{id}
+        </foreach>
+    </delete>
+</mapper>
