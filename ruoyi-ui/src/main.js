@@ -16,6 +16,8 @@ import { download } from '@/utils/request'
 
 import './assets/icons' // icon
 import './permission' // permission control
+import globalFilters from './filters'; // 引入过滤器文件
+
 import { getDicts } from "@/api/system/dict/data";
 import { getConfigKey } from "@/api/system/config";
 import { parseTime, resetForm, addDateRange, selectDictLabel, selectDictLabels, handleTree } from "@/utils/ruoyi";
@@ -62,6 +64,11 @@ Vue.use(directive)
 Vue.use(plugins)
 Vue.use(VueMeta)
 DictData.install()
+
+// 注册全局过滤器
+Object.keys(globalFilters).forEach(key => {
+  Vue.filter(key, globalFilters[key]);
+});
 
 /**
  * If you don't want to use mock-server
